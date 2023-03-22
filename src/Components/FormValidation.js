@@ -57,30 +57,27 @@ function FormValidation() {
   };
   const handleConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
+    if (!ValidatorForm.hasValidationRule("isPasswordMatch")) {
+      ValidatorForm.addValidationRule("isPasswordMatch", (password) => {
+        if (password !== confirmPassword) {
+          return false;
+        }
+        return true 
+      });
+    }
   };
+
   const handleNewData = (e) => {
     setNewData(e.target.value);
   };
   const onSubmit = (event) => {
     event.preventDefault();
-    // setName("");
-    // setEmail("");
-    // setPassword("");
-    // setConfirmPassword("");
     console.log("name", name);
     console.log("email", email);
     console.log("password", password);
     console.log("Confirm password", confirmPassword);
     console.log(`So the data is of id ${newData}`);
   };
-//   if (!ValidatorForm.hasValidationRule('isPasswordMatch')) {
-//     ValidatorForm.addValidationRule('isPasswordMatch', () => {
-//         if (password !== confirmPassword) {
-//             return false;
-//         }
-//         return true;
-//     });
-// }
   return (
     <Box
       sx={{
@@ -135,8 +132,8 @@ function FormValidation() {
           sx={{ mt: 2, width: 300 }}
           id="confirmPassword"
           color="secondary"
-          validators={["required"]}
-          errorMessages={["Password Does Not Match", "This Field is Required"]}
+          validators={["required", "isPasswordMatch"]}
+          errorMessages={["This Field is Required", "Password Does not match"]}
         ></TextValidator>
         <TextValidator
           select
