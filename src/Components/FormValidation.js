@@ -44,7 +44,7 @@ function FormValidation() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
-  const [newData,setNewData]=useState(1);
+  const [newData, setNewData] = useState(1);
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -58,9 +58,9 @@ function FormValidation() {
   const handleConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
   };
-  const handleNewData=(e)=>{
-    setNewData(e.target.value)
-  }
+  const handleNewData = (e) => {
+    setNewData(e.target.value);
+  };
   const onSubmit = (event) => {
     event.preventDefault();
     // setName("");
@@ -73,7 +73,14 @@ function FormValidation() {
     console.log("Confirm password", confirmPassword);
     console.log(`So the data is of id ${newData}`);
   };
-
+//   if (!ValidatorForm.hasValidationRule('isPasswordMatch')) {
+//     ValidatorForm.addValidationRule('isPasswordMatch', () => {
+//         if (password !== confirmPassword) {
+//             return false;
+//         }
+//         return true;
+//     });
+// }
   return (
     <Box
       sx={{
@@ -86,7 +93,7 @@ function FormValidation() {
       <Typography component="h1" variant="h5">
         Form Validation
       </Typography>
-      <ValidatorForm autoComplete="off" onSubmit={(e) => onSubmit(e)}>
+      <ValidatorForm onSubmit={(e) => onSubmit(e)}>
         <TextValidator
           type="text"
           label="Name"
@@ -129,7 +136,7 @@ function FormValidation() {
           id="confirmPassword"
           color="secondary"
           validators={["required"]}
-          errorMessages={["This Field is Required", "Password Does Not Match"]}
+          errorMessages={["Password Does Not Match", "This Field is Required"]}
         ></TextValidator>
         <TextValidator
           select
@@ -141,7 +148,7 @@ function FormValidation() {
           }}
           helperText="Please select your Name"
           variant="standard"
-          onChange={(e)=>handleNewData(e)}
+          onChange={(e) => handleNewData(e)}
         >
           {data.map((option) => (
             <option key={option.id} value={option.id}>
