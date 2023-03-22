@@ -44,7 +44,7 @@ function FormValidation() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
-
+  const [newData,setNewData]=useState(1);
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -58,16 +58,20 @@ function FormValidation() {
   const handleConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
   };
+  const handleNewData=(e)=>{
+    setNewData(e.target.value)
+  }
   const onSubmit = (event) => {
     event.preventDefault();
-    setName("");
-    setEmail("");
-    setPassword("");
+    // setName("");
+    // setEmail("");
+    // setPassword("");
+    // setConfirmPassword("");
     console.log("name", name);
     console.log("email", email);
     console.log("password", password);
     console.log("Confirm password", confirmPassword);
-
+    console.log(`So the data is of id ${newData}`);
   };
 
   return (
@@ -122,10 +126,10 @@ function FormValidation() {
           onChange={(e) => handleConfirmPassword(e)}
           label="Confirm Password"
           sx={{ mt: 2, width: 300 }}
-          id="Password"
+          id="confirmPassword"
           color="secondary"
           validators={["required"]}
-          errorMessages={["This Field is Required","Password Does Not Match"]}
+          errorMessages={["This Field is Required", "Password Does Not Match"]}
         ></TextValidator>
         <TextValidator
           select
@@ -137,6 +141,7 @@ function FormValidation() {
           }}
           helperText="Please select your Name"
           variant="standard"
+          onChange={(e)=>handleNewData(e)}
         >
           {data.map((option) => (
             <option key={option.id} value={option.id}>
